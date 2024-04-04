@@ -17,8 +17,10 @@ const getInput = (e) => {
         ui.showAlert("Aradiginiz Kullanici Bulunamadi.","alert alert-danger");
       }else{
         ui.showAlert("Aradiginiz kullanici bulundu.", "alert alert-success")
+        ui.renderProfile(res);
       }
-    });
+    })
+    .catch((err) => console.log(err));
   }
 };
 elements.searchBtn.addEventListener("click", getInput);
