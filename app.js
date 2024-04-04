@@ -10,7 +10,9 @@ const ui = new UI();
 const getInput = (e) => {
   e.preventDefault();
   const value = elements.searchInput.value;
-  if (value === '') return;
+  if (value === ''){
+    ui.showAlert("Lutfen form alanini doldurunuz","alert alert-warning")
+  }
   if (value) {
     github.fetchUserData(value).then((res) => {
       if(res.message === "Not Found"){
@@ -21,6 +23,7 @@ const getInput = (e) => {
       }
     })
     .catch((err) => console.log(err));
+    return;
   }
 };
 elements.searchBtn.addEventListener("click", getInput);

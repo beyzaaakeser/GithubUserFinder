@@ -3,6 +3,9 @@ import { elements } from "./helpers.js";
 export class UI {
     constructor(){
         this.profile = elements.profile;
+        this.button  = elements.btnClear;
+        this.input = elements.searchInput;
+        this.button.addEventListener("click",this.clearProfile.bind(this));
     }
     // uyari mesaji olusturma
     showAlert(message, className){
@@ -23,7 +26,7 @@ export class UI {
        }
     }
 
-    // render profile fonksiyonu
+    // render profile fonksiyonu -> profil arayuzunu ekrana basar
     renderProfile(res){
         console.log(res)
         const created_at = new Date(res.created_at).toLocaleDateString()
@@ -55,4 +58,14 @@ export class UI {
         `
     }
 
+    // ekrani temizleme ve bildirim basma
+    clearProfile(e){
+      e.preventDefault();
+      if(confirm("Silmek istediginize emin misiniz?")){
+        this.profile.innerHTML = "";
+        this.input.value = "";
+        this.showAlert("Butun veriler silindi", "alert alert-info")
+      }
+      
+    }
 }
