@@ -1,40 +1,40 @@
-import { elements } from "./helpers.js";
+import { elements } from './helpers.js';
 
 export class UI {
-    constructor(){
-        this.profile = elements.profile;
-        this.button  = elements.btnClear;
-        this.input = elements.searchInput;
-        this.btnDark = elements.btn;
-        this.body = elements.body;
-        // olay izleyicileri
-        this.button.addEventListener("click",this.clearProfile.bind(this));
-        this.btnDark.addEventListener("click",this.darkMode.bind(this))
+  constructor() {
+    this.profile = elements.profile;
+    this.button = elements.btnClear;
+    this.input = elements.searchInput;
+    this.btnDark = elements.btn;
+    this.body = elements.body;
+    // olay izleyicileri
+    this.button.addEventListener('click', this.clearProfile.bind(this));
+    this.btnDark.addEventListener('click', this.darkMode.bind(this));
+  }
+  // uyari mesaji olusturma
+  showAlert(message, className) {
+    const div = document.createElement('div');
+    div.className = className;
+    div.textContent = message;
+    elements.warning.appendChild(div);
+    // uyariyi ekrandan silme fonksiyonunu showAlert fonksiyonu calistiktan 3 saniye sonra calistir
+    setTimeout(() => {
+      this.clearAlert();
+    }, 3000);
+  }
+  // uyariyi ekrandan silme
+  clearAlert() {
+    const currentAllert = document.querySelector('.alert');
+    if (currentAllert) {
+      currentAllert.remove();
     }
-    // uyari mesaji olusturma
-    showAlert(message, className){
-        const div =document.createElement("div")
-        div.className = className;
-        div.textContent = message;
-        elements.warning.appendChild(div);
-        // uyariyi ekrandan silme fonksiyonunu showAlert fonksiyonu calistiktan 3 saniye sonra calistir
-        setTimeout(()=>{
-            this.clearAlert();
-        },3000) 
-    }
-    // uyariyi ekrandan silme
-    clearAlert(){
-       const currentAllert =  document.querySelector(".alert");
-       if(currentAllert){
-        currentAllert.remove()
-       }
-    }
+  }
 
-    // render profile fonksiyonu -> profil arayuzunu ekrana basar
-    renderProfile(res){
-        console.log(res)
-        const created_at = new Date(res.created_at).toLocaleDateString()
-        this.profile.innerHTML = `
+  // render profile fonksiyonu -> profil arayuzunu ekrana basar
+  renderProfile(res) {
+    console.log(res);
+    const created_at = new Date(res.created_at).toLocaleDateString();
+    this.profile.innerHTML = `
         <div class="row border p-4 my-4 rounded-3">
         <div class="col-md-3">
           <img
@@ -59,29 +59,30 @@ export class UI {
           </ul>
         </div>
       </div>
-        `
+        `;
+  }
+
+  // ekrani temizleme ve bildirim basma
+  clearProfile(e) {
+    e.preventDefault();
+    if (confirm('Silmek istediginize emin misiniz?')) {
+      this.profile.innerHTML = '';
+      this.input.value = '';
+      this.showAlert('Butun veriler silindi', 'alert alert-info');
+    }
+  }
+
+  darkMode() {
+    if (this.body.classList.contains('bg-dark')) {
+      this.body.className = 'bg-light text-bg-light';
+      this.btnDark.className = 'btn btn-dark';
+      this.btnDark.textContent = 'Dark Mode';
+    } else if (this.body.classList.contains('bg-light')) {
+      this.body.className = 'bg-dark text-bg-dark';
+      this.btnDark.className = 'btn btn-light';
+      this.btnDark.textContent = 'Light Mode';
     }
 
-    // ekrani temizleme ve bildirim basma
-    clearProfile(e){
-      e.preventDefault();
-      if(confirm("Silmek istediginize emin misiniz?")){
-        this.profile.innerHTML = "";
-        this.input.value = "";
-        this.showAlert("Butun veriler silindi", "alert alert-info")
-      }
-      
-    }
-
-    darkMode(){
-      if(this.body.classList.contains('bg-dark')){
-        this.body.className = "bg-light text-bg-light";
-        this.btnDark.className = "btn btn-dark";
-        this.btnDark.textContent = "Dark Mode"
-      }else if(this.body.classList.contains('bg-light')){
-        this.body.className = "bg-dark text-bg-dark";
-        this.btnDark.className = "btn btn-light";
-        this.btnDark.textContent = "Light Mode";
-      }
-    }
+    elements.title.classList.toggle('text-dark');
+  }
 }
