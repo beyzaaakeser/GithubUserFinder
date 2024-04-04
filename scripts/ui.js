@@ -33,6 +33,7 @@ export class UI {
 
   // render profile fonksiyonu -> profil arayuzunu ekrana basar
   renderProfile(res) {
+    console.log(res)
     const created_at = new Date(res.created_at).toLocaleDateString();
     this.profile.innerHTML = `
         <div class="row border p-4 my-4 rounded-3">
@@ -69,6 +70,7 @@ export class UI {
       this.profile.innerHTML = '';
       this.input.value = '';
       this.showAlert('Butun veriler silindi', 'alert alert-info');
+      this.repoArea.innerHTML = "";
     }
   }
 
@@ -89,9 +91,9 @@ export class UI {
     data.forEach((repo) => {
       this.repoArea.innerHTML += `
          
-     <div class="border row p-3">
+     <div class="border row p-3 mb-3">
       <div class="col-6">
-          <a href="" target="_blank">${repo.name}</a>
+          <a href="${repo.html_url}" target="_blank">${repo.name}</a>
       </div>
       <div class="col-6">
           <span class="badge bg-secondary">Yıldız:${repo.stargazers_count}</span>
