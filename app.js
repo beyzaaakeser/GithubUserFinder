@@ -6,7 +6,7 @@ import { UI } from './scripts/ui.js';
 const github = new Github();
 // UI classinin ornegini olusturma
 const ui = new UI();
-
+github.fetchUserData();
 const getInput = (e) => {
   e.preventDefault();
   const value = elements.searchInput.value;
