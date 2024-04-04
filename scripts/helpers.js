@@ -4,4 +4,7 @@ export const elements = {
     warning: document.querySelector("#warning"),
     profile:document.querySelector("#profile"),
     btnClear:document.querySelector("#btnClear"),
+    btn:document.querySelector("#btn-dark"),
+    body:document.querySelector("#body"),
+    title:document.querySelector("#title"),
 }
