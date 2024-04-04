@@ -4,13 +4,22 @@ export class UI {
     constructor(){
         
     }
-
+    // uyari mesaji olusturma
     showAlert(message, className){
         const div =document.createElement("div")
         div.className = className;
         div.textContent = message;
-        console.log(div)
         elements.warning.appendChild(div);
-        console.log(elements.warning)
+        // uyariyi ekrandan silme fonksiyonunu showAlert fonksiyonu calistiktan 3 saniye sonra calistir
+        setTimeout(()=>{
+            this.clearAlert();
+        },3000) 
+    }
+    // uyariyi ekrandan silme
+    clearAlert(){
+       const currentAllert =  document.querySelector(".alert");
+       if(currentAllert){
+        currentAllert.remove()
+       }
     }
 }
