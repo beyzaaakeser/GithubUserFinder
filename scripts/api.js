@@ -1,7 +1,7 @@
 export class Github {
   constructor() {
-    this.client_id = '8f9284b5310fa0db4af8';
-    this.client_secret = 'e282775ca689a063519aee7a24556025bf137d81';
+    this.client_id = '';
+    this.client_secret = '';
     this.per_page = 10;
     this.sort = "asc"
   }
