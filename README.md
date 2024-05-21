@@ -11,6 +11,7 @@ Github Kullanıcı Bulucu Projesi, web geliştiricilerin GitHub üzerindeki kull
 - HTML5
 - CSS
 - Javascript
+- API
 
 <h2> Visit My Github User Finder Project: </h2>
 
